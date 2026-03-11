@@ -1,0 +1,11 @@
+Login command: curl -X POST http://localhost:3000/auth/login -H "Content-Type: application/json" -d '{"email": "ragini9315516129@gmail.com","password": "password123"}'
+Output: {"message": "OTP sent", "loginSessionId":"xm9rbc"}
+
+Verify OTP command: curl -c cookies.txt -X POST http://localhost:3000/auth/verify-otp -H "Content-Type: application/json" -d '{"loginSessionId":"xm9rbc", "otp": "821447"}'
+Output: {"message": "OTP verified","sessionId":"xm9rbc"}
+
+Get Token command: curl -b cookies.txt -X POST http://localhost:3000/auth/token 
+Output: {"access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJ1bWFpbCI6InJhZ2luaTkzMTU1MTYxMj1AZ21haWwuY29tIiwic2Vzc2lvbklkIjoieG05cmJjIiwiaWF0IjoxNzczMjQ0OTI3LCJleHAiOjE3NzMyNDU4Mjd9LJr29HBm45_yZPL1-5NZD5biHfBSiqMazpWYIjmas5s", "expires_in":900}
+
+Access Protected Route: curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bWFpbCI6InJhZ2luaTkzMTU1MTYxMj1AZ21haWwuY29tIiwic2Vzc2lvbklkIjoieG05cmJjIiwiaWF0IjoxNzczMjQ0OTI3LCJleHAiOjE3NzMyNDU4Mjd9.LJr29HBm45_yZPL1-5NZD5biHfBSiqMazpWYIjmas5s" http://localhost:3000/protected
+Output: {"message": "Access granted", "user":{"email": "ragini9315516129@gmail.com", "sessionId":"xm9rbc", "iat":177324 4927, "exp":1773245827},"success_flag": "FLAG-cmFnaW5pOTMxNTUxNjEyOUBnbWFpbC5jb21fQ09NUEXFVEVEXOFTU01HTK1FT1 Q="}
